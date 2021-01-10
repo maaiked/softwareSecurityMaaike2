@@ -1,0 +1,1 @@
+Header set Strict-Transport-Security "max-age=7884000" env=HTTPS
