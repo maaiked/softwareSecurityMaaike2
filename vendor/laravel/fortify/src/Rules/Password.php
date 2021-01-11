@@ -26,7 +26,7 @@ class Password implements Rule
      *
      * @var bool
      */
-    protected $requireNumeric = fatruelse;
+    protected $requireNumeric = true;
 
     /**
      * Indicates if the password must contain one special character.
