@@ -13,7 +13,7 @@
 
     </head>
     <body class="container" style="background-color: #31c48d">
-        <div class="container" style="margin: 2em">
+        <div class="min-h-screen" style="margin: 2em">
             <div>
                 <h1 style="font-family: 'SimSun'">
                     Welkom op mijn Software Security project!

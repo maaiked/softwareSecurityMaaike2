@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\UserController;
 
 /*
 |--------------------------------------------------------------------------
@@ -22,6 +23,10 @@ Route::get('/test', function () {
     return view('dashboard');
 });
 
+Route::get('/privacy', function () {
+    return view('privacy');
+})->name('privacy');
+
 
 // Routes only accessible when user is logged in
 Route::middleware(['auth:sanctum', 'verified'])->group(function(){
@@ -30,6 +35,8 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function(){
 Route::get('/dashboard', function(){
     return view('dashboard');
 })->name('dashboard');
+
+    Route::get('/downloadUserInfo/{id}', [UserController::class, 'downloadUserInfo'])->name('downloadUserInfo');
 
 
 // Routes only accessible by the admin

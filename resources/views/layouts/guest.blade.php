@@ -21,4 +21,5 @@
             {{ $slot }}
         </div>
     </body>
+@include('partials.footer')
 </html>

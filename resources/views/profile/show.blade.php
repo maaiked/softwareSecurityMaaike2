@@ -38,6 +38,12 @@
             <div class="mt-10 sm:mt-0">
                 @livewire('profile.delete-user-form')
             </div>
+
+            <x-jet-section-border />
+                <div class="mt-10 sm:mt-0">
+                    <a href="{{ Route('downloadUserInfo', ['id'=>$user->id])}}" role="button"><u>Download your personal information.</u></a>
+                </div>
+
         </div>
     </div>
 </x-app-layout>
