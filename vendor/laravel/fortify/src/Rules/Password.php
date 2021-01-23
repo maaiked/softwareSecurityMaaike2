@@ -4,6 +4,10 @@ namespace Laravel\Fortify\Rules;
 
 use Illuminate\Contracts\Validation\Rule;
 use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Http;
+
+
 
 class Password implements Rule
 {
@@ -42,6 +46,8 @@ class Password implements Rule
      */
     protected $message;
 
+    private $threehundred = false;
+
     /**
      * Determine if the validation rule passes.
      *
@@ -49,6 +55,7 @@ class Password implements Rule
      * @param  mixed  $value
      * @return bool
      */
+
     public function passes($attribute, $value)
     {
         if ($this->requireUppercase && Str::lower($value) === $value) {
@@ -61,6 +68,32 @@ class Password implements Rule
 
         if ($this->requireSpecialCharacter && ! preg_match('/[\W_]/', $value)) {
             return false;
+        }
+
+        // check against pwnd passwords
+        if ($value){
+            $pwd = Sha1($value);
+            $url = 'https://api.pwnedpasswords.com/range/'.substr($pwd,0,5);
+            $response = Http::get($url);
+            $body = $response->body();
+            $suffix = substr($pwd, 5, 35);
+            $pieces = explode("\r\n", $body);
+            foreach ($pieces as $piece){
+                $subpiece = substr($piece, 0, 35);
+                $number = strncasecmp($subpiece, $suffix ,30);
+                if ($number == 0)
+                {
+                    $count = explode(':', $piece);
+                    $aantal = $count[1];
+                    $int_value = intval($aantal);
+                    if ($int_value > 300)
+                    {
+                        $this->threehundred = true;
+                        print("You choose a password that was breached over 300 times");
+                        return false;
+                    }
+                }
+            }
         }
 
         return Str::length($value) >= $this->length;
@@ -115,8 +148,15 @@ class Password implements Rule
 
             case $this->requireUppercase
                 && $this->requireNumeric
-                && $this->requireSpecialCharacter:
-                return __('The :attribute must be at least :length characters and contain at least one uppercase character, one number, and one special character.', [
+                && $this->requireSpecialCharacter
+                && ! $this->threehundred :
+                return __('The :attribute must be at least :length characters and contain at least one uppercase character, one number, and one special character.
+                ', [
+                    'length' => $this->length,
+                ]);
+
+            case $this->threehundred :
+                return __('The :attribute has been breached over 300 times. Please choose a more secure password.', [
                     'length' => $this->length,
                 ]);
 
@@ -126,6 +166,7 @@ class Password implements Rule
                 ]);
         }
     }
+
 
     /**
      * Set the minimum length of the password.
