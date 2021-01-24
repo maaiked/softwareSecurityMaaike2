@@ -27,4 +27,8 @@ class Blog extends Model
     protected $hidden = [
         'user_id',
     ];
+
+    protected $attributes = [
+        'user_id' => 1,
+    ];
 }
