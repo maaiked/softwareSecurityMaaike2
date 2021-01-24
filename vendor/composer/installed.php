@@ -7,7 +7,11 @@
     array (
     ),
 <<<<<<< HEAD
+<<<<<<< HEAD
     'reference' => 'f12c260ba269337178c2f17f45b0269a0e8cfb49',
+=======
+    'reference' => 'fc2ee12de9252ad1854ec33c85f155dec6d4b1d1',
+>>>>>>> parent of c71e5578... Revert "added all to github"
 =======
     'reference' => 'fc2ee12de9252ad1854ec33c85f155dec6d4b1d1',
 >>>>>>> parent of c71e5578... Revert "added all to github"
@@ -522,7 +526,11 @@
       array (
       ),
 <<<<<<< HEAD
+<<<<<<< HEAD
       'reference' => 'f12c260ba269337178c2f17f45b0269a0e8cfb49',
+=======
+      'reference' => 'fc2ee12de9252ad1854ec33c85f155dec6d4b1d1',
+>>>>>>> parent of c71e5578... Revert "added all to github"
 =======
       'reference' => 'fc2ee12de9252ad1854ec33c85f155dec6d4b1d1',
 >>>>>>> parent of c71e5578... Revert "added all to github"
