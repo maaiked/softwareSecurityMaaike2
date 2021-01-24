@@ -1,6 +1,4 @@
-
 <div>
-
     <!-- Generate API Token -->
     <x-jet-form-section submit="createApiToken">
         <x-slot name="title">
@@ -27,8 +25,7 @@
                     <div class="mt-2 grid grid-cols-1 md:grid-cols-2 gap-4">
                         @foreach (Laravel\Jetstream\Jetstream::$permissions as $permission)
                             <label class="flex items-center">
-                                <x-jet-input type="checkbox" class="form-checkbox" value="{{ $permission }}" wire:model.defer="createApiTokenForm.permissions"
-                                />
+                                <input type="checkbox" class="form-checkbox" value="{{ $permission }}" wire:model.defer="createApiTokenForm.permissions">
                                 <span class="ml-2 text-sm text-gray-600">{{ $permission }}</span>
                             </label>
                         @endforeach
@@ -112,12 +109,10 @@
             </div>
         </x-slot>
 
-       <x-slot name="footer">
-           <div>
-           <x-jet-secondary-button wire:click="$set('displayingToken', false)" wire:loading.attr="disabled">
-               {{ __('Close') }}
+        <x-slot name="footer">
+            <x-jet-secondary-button wire:click="$set('displayingToken', false)" wire:loading.attr="disabled">
+                {{ __('Close') }}
             </x-jet-secondary-button>
-           </div>
         </x-slot>
     </x-jet-dialog-modal>
 

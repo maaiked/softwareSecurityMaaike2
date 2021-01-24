@@ -2,7 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
-use App\Http\Controllers\BlogController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -27,22 +27,14 @@ Route::get('/privacy', function () {
     return view('privacy');
 })->name('privacy');
 
-Route::get('/blogs', [BlogController::class, 'index']);
-Route::options('/blogs', [BlogController::class, 'options']);
 
 // Routes only accessible when user is logged in
 Route::middleware(['auth:sanctum', 'verified'])->group(function(){
 
-    Route::get('/blogs/{blog}', [BlogController::class, 'show']);
-    Route::post('/blogs', [BlogController::class, 'store']);
-    Route::put('/blogs/{blog}', [BlogController::class, 'update']);
-    Route::delete('/blogs/{blog}', [BlogController::class, 'delete']);
 
-
-
-    Route::get('/dashboard', function(){
-        return view('dashboard');
-    })->name('dashboard');
+Route::get('/dashboard', function(){
+    return view('dashboard');
+})->name('dashboard');
 
     Route::get('/downloadUserInfo/{id}', [UserController::class, 'downloadUserInfo'])->name('downloadUserInfo');
 
