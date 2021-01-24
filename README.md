@@ -5,6 +5,11 @@ Het werd opgebouwd met Laravel - Jetstream.
 
 ## public link
 Dit project wordt gehost op https://maaikedupont.be/public
+De API's zijn te vinden op https://maaikedupont.be/public/blogs
+
+Voor testfunctionaliteit kan aangelogd worden met
+- voor adminfuncties: admin@mail.be - PW : Admin15!
+- voor gebruikersfuncties: gebruiker@mail.be - PW : Gebruiker15!
 
 
 ## Registratie
