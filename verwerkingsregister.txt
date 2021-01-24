@@ -1,0 +1,39 @@
+Verwerkingsregister
+
+Inhoud
+
+- Naam en contactgegevens verantwoordelijke: Maaike Dupont
+Straat 15, 8800 Mijnstad.
+0464 46 46 46
+Admin@maaike.be
+
+- Eventueel, naam en contactgegevens DPO
+Maaike Dupont
+Straat 15, 8800 Mijnstad.
+0464 46 46 46
+Admin@maaike.be
+
+- Verwerkingsdoeleinden
+De gegevens van de gebruikers worden enkel gebruikt om zich te
+kunnen authenticeren op de website. Bij het verwijderen van het account worden
+ook alle persoonlijke gegevens verwijderd.
+
+- Beschrijving categorieen betrokkenen
+Enkel de geregistreerde gebruikers.
+
+- Beschrijving categorieen persoonsgegevens
+Naam en mailadres wordt bijgehouden.
+Daarnaast wordt de gehashte versie van het wachtwoord bijgehouden.
+
+- Categorieen ontvangers
+Enkel de verantwoordelijke van de website.
+
+- Eventueel, doorgiften aan derde landen
+Niet van toepassing
+
+- Indien mogelijk, beoogde bewaringstermijn
+Gegevens worden verwijderd wanneer de gebruiker zijn account verwijderd.
+
+- Indien mogelijk, algemene beschrijving technische en organisatorische beveiligingsmaatregelen
+Website maakt gebruikt van authenticatie en authorisatie. Daarnaast wordt gebruikt maar van een XSRFtoken en sessiontokens om de veiligheid te verhogen.
+Passwoorden worden geencrypteerd met BCrypt en gecontroleerd of deze minder dan 300 keer gebreached werden.

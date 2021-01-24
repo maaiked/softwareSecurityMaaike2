@@ -4,18 +4,26 @@ namespace App\Http\Controllers;
 
 use App\Http\Resources\BlogResource;
 use App\Models\Blog;
+use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class BlogController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\JsonResponse
      */
     public function index()
     {
-        return Blog::all();
+       return Blog::all();
+    }
+
+    public function options(Request $request)
+    {
+        return response()->json("options", 200);
+
     }
 
     /**
@@ -23,22 +31,29 @@ class BlogController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
-    {
-        //
-    }
+
 
     /**
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\JsonResponse
      */
     public function store(Request $request)
     {
-        $blog = Blog::create($request->all());
+        if($request->user()->admin) {
+            return response()->json("Sorry, een admin kan geen resources aanmaken.", 403);;
+        }
+        else {
+            $blog =  Blog::create([
+                'title' => $request['title'],
+                'content' => $request['content'],
+                'user_id' => 1
+            ]);
+            return response()->json($blog, 201);
+        }
 
-        return response()->json($blog, 201);
+
     }
 
     /**
@@ -58,20 +73,18 @@ class BlogController extends Controller
      * @param  \App\Models\Blog  $blog
      * @return \Illuminate\Http\Response
      */
-    public function edit(Blog $blog)
-    {
-        //
-    }
+
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  \App\Models\Blog  $blog
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\JsonResponse
      */
     public function update(Request $request, Blog $blog)
     {
+
         $blog->update($request->all());
 
         return response()->json($blog, 200);
@@ -80,13 +93,20 @@ class BlogController extends Controller
     /**
      * Remove the specified resource from storage.
      *
+     * @param  \Illuminate\Http\Request  $request
      * @param  \App\Models\Blog  $blog
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\JsonResponse
      */
-    public function delete( $blog)
+    public function delete(Request $request, Blog $blog)
     {
-        $blog->delete();
 
-        return response()->json(null, 204);
+        if($request->user()->admin) {
+            $blog->delete();
+        }
+        elseif ($request->user()->id == $blog->user_id) {
+            $blog->delete();
+        }
+        else return response()->json("Sorry, je hebt geen recht deze blog te verwijderen.", 403);
+
     }
 }
